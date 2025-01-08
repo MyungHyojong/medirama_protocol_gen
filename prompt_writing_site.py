@@ -29,6 +29,7 @@ cancer_type = st.sidebar.text_input("Cancer Type")
 subtype = st.sidebar.text_input("Subtype")
 word_limit = st.sidebar.number_input("Letter Limit", min_value=100, max_value=9000, step=1000)
 temperature = st.sidebar.slider("Temperature", min_value=0.5, max_value=1.5, value=0.7, step=0.1)
+model = st.sidebar.text_input("Model Name")
 
 # Input for section request
 section_request = st.text_area(
@@ -44,6 +45,25 @@ additional_request = st.text_area(
     height=80,
 )
 
+# Initialize session state for history
+if "history" not in st.session_state:
+    st.session_state.history = []
+
+
+# Sidebar for history
+st.sidebar.header("Generated History")
+
+# Display history in the sidebar with toggle
+if st.session_state.history:
+    for idx, entry in enumerate(reversed(st.session_state.history), start=1):
+        with st.sidebar.expander(f"{entry['title']}"):
+            st.markdown(entry['content'])
+
+    # Add a button to clear the history
+    if st.sidebar.button("Clear History"):
+        st.session_state.history = []
+        st.sidebar.success("History cleared!")
+        
 
 # Initialize session state for generated text
 if "generated_text" not in st.session_state:
@@ -108,6 +128,12 @@ if st.button("Generate Protocol Section"):
 
                 # Store the refined text in session state
                 st.session_state.generated_text = refined_text
+
+
+                st.session_state.history.append({
+                    "title": section_request,
+                    "content": generated_text
+                })
 
             except Exception as e:
                 st.error(f"Error: {e}")
