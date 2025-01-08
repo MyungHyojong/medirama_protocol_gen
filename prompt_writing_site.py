@@ -17,6 +17,7 @@ from openai import OpenAI
 openai.api_key = st.secrets["openai"]["api_key"]
 client = OpenAI(api_key=openai.api_key)
 
+
 # Streamlit app title
 st.title("Clinical Trial Protocol Generator")
 
@@ -27,7 +28,7 @@ moa_category = st.sidebar.text_input("MOA Category")
 specific_moa = st.sidebar.text_input("Specific MOA")
 cancer_type = st.sidebar.text_input("Cancer Type")
 subtype = st.sidebar.text_input("Subtype")
-word_limit = st.sidebar.number_input("Letter Limit", min_value=700, max_value=9000, step=1000)
+word_limit = st.sidebar.number_input("Letter Limit", min_value=100, max_value=9000, step=1000)
 temperature = st.sidebar.slider("Temperature", min_value=0.5, max_value=1.5, value=0.7, step=0.1)
 
 # Input for section request
@@ -106,22 +107,6 @@ st.text_area(
     height=300
 )
 
-# Button to copy the final text to clipboard using JavaScript
-copy_button = """
-    <button onclick=\"copyToClipboard()\">Copy to Clipboard</button>
-    <script>
-    function copyToClipboard() {
-        const text = document.getElementById("generated-text").value;
-        navigator.clipboard.writeText(text).then(function() {
-            alert("Text copied to clipboard!");
-        }, function(err) {
-            alert("Failed to copy text: " + err);
-        });
-    }
-    </script>
-    <textarea id=\"generated-text\" style=\"display:none;\">{text}</textarea>
-"""
-st.markdown(copy_button.format(text=st.session_state.generated_text.replace("{", "{{").replace("}", "}}")), unsafe_allow_html=True)
 
 # Footer
 st.write("\nCreated with Streamlit and OpenAI GPT.")
