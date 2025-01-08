@@ -108,7 +108,7 @@ st.text_area(
 
 # Button to copy the final text to clipboard using JavaScript
 copy_button = """
-    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    <button onclick=\"copyToClipboard()\">Copy to Clipboard</button>
     <script>
     function copyToClipboard() {
         const text = document.getElementById("generated-text").value;
@@ -119,9 +119,9 @@ copy_button = """
         });
     }
     </script>
-    <textarea id="generated-text" style="display:none;">{text}</textarea>
+    <textarea id=\"generated-text\" style=\"display:none;\">{text}</textarea>
 """
-st.markdown(copy_button.format(text=st.session_state.generated_text), unsafe_allow_html=True)
+st.markdown(copy_button.format(text=st.session_state.generated_text.replace("{", "{{").replace("}", "}}")), unsafe_allow_html=True)
 
 # Footer
 st.write("\nCreated with Streamlit and OpenAI GPT.")
