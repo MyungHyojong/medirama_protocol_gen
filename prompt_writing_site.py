@@ -29,7 +29,7 @@ cancer_type = st.sidebar.text_input("Cancer Type")
 subtype = st.sidebar.text_input("Subtype")
 word_limit = st.sidebar.number_input("Letter Limit", min_value=100, max_value=9000, step=1000)
 temperature = st.sidebar.slider("Temperature", min_value=0.5, max_value=1.5, value=0.7, step=0.1)
-model = st.sidebar.text_input("Model Name")
+model = st.sidebar.text_input("Model Name", value="ft:gpt-4o-mini-2024-07-18:medirama::AmzAIoxv")
 
 # Input for section request
 section_request = st.text_area(
