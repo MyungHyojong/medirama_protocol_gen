@@ -106,10 +106,22 @@ st.text_area(
     height=300
 )
 
-# Button to copy the final text to clipboard
-if st.button("Copy to Clipboard"):
-    pyperclip.copy(st.session_state.generated_text)
-    st.success("Text copied to clipboard!")
+# Button to copy the final text to clipboard using JavaScript
+copy_button = """
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    <script>
+    function copyToClipboard() {
+        const text = document.getElementById("generated-text").value;
+        navigator.clipboard.writeText(text).then(function() {
+            alert("Text copied to clipboard!");
+        }, function(err) {
+            alert("Failed to copy text: " + err);
+        });
+    }
+    </script>
+    <textarea id="generated-text" style="display:none;">{text}</textarea>
+"""
+st.markdown(copy_button.format(text=st.session_state.generated_text), unsafe_allow_html=True)
 
 # Footer
 st.write("\nCreated with Streamlit and OpenAI GPT.")
