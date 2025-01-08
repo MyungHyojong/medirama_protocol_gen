@@ -17,7 +17,6 @@ from openai import OpenAI
 openai.api_key = st.secrets["openai"]["api_key"]
 client = OpenAI(api_key=openai.api_key)
 
-
 # Streamlit app title
 st.title("Clinical Trial Protocol Generator")
 
@@ -37,6 +36,14 @@ section_request = st.text_area(
     "Use in Pregnancy",
     height=80,
 )
+
+# Input for additional requests
+additional_request = st.text_area(
+    "Additional Requests (Optional):",
+    "",
+    height=80,
+)
+
 
 # Initialize session state for generated text
 if "generated_text" not in st.session_state:
@@ -60,6 +67,11 @@ if st.button("Generate Protocol Section"):
                     "- Do not indicate other section or page number. The section you wrote should be understandable in itself\n"
                     f"- Write within {word_limit} letters\n"
                 )
+
+                # Add additional requests if provided
+                if additional_request.strip():
+                    formatted_prompt += f"\nAdditional request: {additional_request.strip()}\n"
+
 
                 # Generate text using GPT (first model)
                 completion = client.chat.completions.create(
