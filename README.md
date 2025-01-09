@@ -42,8 +42,7 @@
 ---
 
 ## 사용법
-
-![Clinical Trial Protocol]([https://example.com/image.png](https://i.ibb.co/xCZhwYD/image1.png))
+![Clinical Trial Protocol](https://i.ibb.co/xCZhwYD/image1.png)
 
 1. **사이드바에서 매개변수 입력**:
     - 단계(Phase)
