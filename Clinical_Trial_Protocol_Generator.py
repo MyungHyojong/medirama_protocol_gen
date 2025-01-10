@@ -100,7 +100,8 @@ if st.button("Generate Protocol Section"):
                         {"role": "system", "content": "You are a clinical scientist with expertise in writing clinical trial protocols.."},
                         {"role": "user", "content": formatted_prompt}
                     ],
-                    temperature=temperature
+                    temperature=temperature,
+                    max_tokens=15000
                 )
                 generated_text = completion.choices[0].message.content
 
@@ -123,7 +124,8 @@ if st.button("Generate Protocol Section"):
                         {"role": "system", "content": "You are a helpful assistant that analyzes clinical trial descriptions."},
                         {"role": "user", "content": refine_prompt}
                     ],
-                    temperature=temperature
+                    temperature=temperature,
+                    max_tokens=15000
                 )
                 refined_text = response2.choices[0].message.content
 
