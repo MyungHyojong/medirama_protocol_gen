@@ -80,7 +80,7 @@ if st.button("Generate Protocol Section"):
                 formatted_prompt = (
                     f"Write a clinical trial protocol section for \n'{section_request}'\n"
                     f"for the study titled: \n'(MOA) of {specific_moa}, a {moa_category}, "
-                    f"in combination with immunotherapy, in patients with {cancer_type}, phase {phase}'\n\n"
+                    f"in patients with {cancer_type}, {subtype}, phase {phase}'\n\n"
                     "Write as the following rules:\n"
                     "- Write only the passage with full sentence and exclude other items with a single word\n"
                     "- Additional letters that doesn't belong to the main text such as 'Date, page, Title of the page' should never be included. Only the FULL sentence is available\n"
