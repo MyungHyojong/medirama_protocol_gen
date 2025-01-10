@@ -110,6 +110,7 @@ if st.button("Generate Protocol Section"):
                     f"{generated_text}\n\n"
                     "Write as the following rules:\n"
                     "- Write only the passage with full sentence and exclude other items with a single word\n"
+                    "- If there's company name or medicine name in the text, change it to unidenfiable words such as medicine, drug, company, hospital\n"
                     "- Additional letters that doesn't belong to the main text such as 'Date, page, Title of the page' should never be included. Only the FULL sentence is available\n"
                     "- Do not indicate other section or page number. The section you wrote should be understandable in itself\n"
                     "- If there's too specific contents, make it broader\n"
